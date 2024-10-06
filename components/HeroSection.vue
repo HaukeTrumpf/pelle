@@ -1,19 +1,21 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue';
 
-// Vordefinierte Farben, die für die Buchstaben und Buttons verwendet werden
-const colors = ['#3d87aa', '#fcec8a', '#eb795d']; // brand-blue, brand-yellow, brand-red
-
-// Funktion, um eine zufällige Farbe aus den vordefinierten Farben auszuwählen
+// Function to generate random color in HEX format
 const getRandomColor = (): string => {
-  return colors[Math.floor(Math.random() * colors.length)];
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 };
 
-// Definiere den Text und ein Array, um Farben für jeden Buchstaben zu speichern
+// Define the text and an array to store colors for each letter
 const text = ref('Pelle der Späti');
 const letterColors = ref<string[]>([]);
 
-// Generiere zufällige Farben für jeden Buchstaben, wenn die Komponente gemountet wird
+// Generate random colors for each letter on component mount
 onMounted(() => {
   letterColors.value = text.value.split('').map(() => getRandomColor());
 });
@@ -28,17 +30,17 @@ onMounted(() => {
       <h1
         class="font-clash-semibold font-bold text-6xl md:text-[200px] leading-snug md:leading-[10rem] drop-in"
       >
-        <!-- Buchstaben mit zufälligen Farben und schwarzer Umrandung -->
+        <!-- Display each letter with its own color -->
         <span
           v-for="(letter, index) in text"
           :key="index"
-          :style="{ color: letterColors[index], textShadow: '2px 2px 0px #000, -2px -2px 0px #000, -2px 2px 0px #000, 2px -2px 0px #000' }"
+          :style="{ color: letterColors[index] }"
         >
           {{ letter }}
         </span>
       </h1>
 
-      <!-- Buttons zum Verlinken der Sektionen -->
+      <!-- Buttons to link sections -->
       <div
         class="w-full flex flex-col md:flex-row justify-center mt-10 md:mt-20 gap-4"
       >
@@ -70,9 +72,3 @@ onMounted(() => {
     </div>
   </div>
 </template>
-
-<style scoped>
-.container {
-  height: 100%; /* Ensures container takes full height */
-}
-</style>
