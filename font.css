@@ -1,0 +1,355 @@
+@font-face {
+  font-family: 'Inter';
+  font-weight: 100;
+  src: url('Inter-Thin.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 200;
+  src: url('Inter-ExtraLight.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 300;
+  src: url('Inter-Light.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 400;
+  src: url('Inter-Regular.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 500;
+  src: url('Inter-Medium.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 600;
+  src: url('Inter-SemiBold.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 700;
+  src: url('Inter-Bold.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 800;
+  src: url('Inter-ExtraBold.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-weight: 900;
+  src: url('Inter-Black.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Caslon';
+  font-weight: 400;
+  src: url('LibreCaslonDisplay-Regular.woff') format('woff');
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ClashDisplay-Extralight';
+  src:
+    url('ClashDisplay-Extralight.woff2') format('woff2'),
+    url('ClashDisplay-Extralight.woff') format('woff'),
+    url('ClashDisplay-Extralight.ttf') format('truetype');
+  font-weight: 200;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ClashDisplay-Light';
+  src:
+    url('ClashDisplay-Light.woff2') format('woff2'),
+    url('ClashDisplay-Light.woff') format('woff'),
+    url('ClashDisplay-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ClashDisplay-Regular';
+  src:
+    url('ClashDisplay-Regular.woff2') format('woff2'),
+    url('ClashDisplay-Regular.woff') format('woff'),
+    url('ClashDisplay-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ClashDisplay-Medium';
+  src:
+    url('ClashDisplay-Medium.woff2') format('woff2'),
+    url('ClashDisplay-Medium.woff') format('woff'),
+    url('ClashDisplay-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ClashDisplay-Semibold';
+  src:
+    url('ClashDisplay-Semibold.woff2') format('woff2'),
+    url('ClashDisplay-Semibold.woff') format('woff'),
+    url('ClashDisplay-Semibold.ttf') format('truetype');
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ClashDisplay-Bold';
+  src:
+    url('ClashDisplay-Bold.woff2') format('woff2'),
+    url('ClashDisplay-Bold.woff') format('woff'),
+    url('ClashDisplay-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Archivo-Thin';
+  src:
+    url('Archivo-Thin.woff2') format('woff2'),
+    url('Archivo-Thin.woff') format('woff'),
+    url('Archivo-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Archivo-ThinItalic';
+  src:
+    url('Archivo-ThinItalic.woff2') format('woff2'),
+    url('Archivo-ThinItalic.woff') format('woff'),
+    url('Archivo-ThinItalic.ttf') format('truetype');
+  font-weight: 100;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Archivo-ExtraLight';
+  src:
+    url('Archivo-ExtraLight.woff2') format('woff2'),
+    url('Archivo-ExtraLight.woff') format('woff'),
+    url('Archivo-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Archivo-ExtraLightItalic';
+  src:
+    url('Archivo-ExtraLightItalic.woff2') format('woff2'),
+    url('Archivo-ExtraLightItalic.woff') format('woff'),
+    url('Archivo-ExtraLightItalic.ttf') format('truetype');
+  font-weight: 200;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Archivo-Light';
+  src:
+    url('Archivo-Light.woff2') format('woff2'),
+    url('Archivo-Light.woff') format('woff'),
+    url('Archivo-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Archivo-LightItalic';
+  src:
+    url('Archivo-LightItalic.woff2') format('woff2'),
+    url('Archivo-LightItalic.woff') format('woff'),
+    url('Archivo-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Archivo-Regular';
+  src:
+    url('Archivo-Regular.woff2') format('woff2'),
+    url('Archivo-Regular.woff') format('woff'),
+    url('Archivo-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Archivo-Italic';
+  src:
+    url('Archivo-Italic.woff2') format('woff2'),
+    url('Archivo-Italic.woff') format('woff'),
+    url('Archivo-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Archivo-Medium';
+  src:
+    url('Archivo-Medium.woff2') format('woff2'),
+    url('Archivo-Medium.woff') format('woff'),
+    url('Archivo-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Archivo-MediumItalic';
+  src:
+    url('Archivo-MediumItalic.woff2') format('woff2'),
+    url('Archivo-MediumItalic.woff') format('woff'),
+    url('Archivo-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Archivo-SemiBold';
+  src:
+    url('Archivo-SemiBold.woff2') format('woff2'),
+    url('Archivo-SemiBold.woff') format('woff'),
+    url('Archivo-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Archivo-SemiBoldItalic';
+  src:
+    url('Archivo-SemiBoldItalic.woff2') format('woff2'),
+    url('Archivo-SemiBoldItalic.woff') format('woff'),
+    url('Archivo-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Archivo-Bold';
+  src:
+    url('Archivo-Bold.woff2') format('woff2'),
+    url('Archivo-Bold.woff') format('woff'),
+    url('Archivo-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Archivo-BoldItalic';
+  src:
+    url('Archivo-BoldItalic.woff2') format('woff2'),
+    url('Archivo-BoldItalic.woff') format('woff'),
+    url('Archivo-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Archivo-ExtraBold';
+  src:
+    url('Archivo-ExtraBold.woff2') format('woff2'),
+    url('Archivo-ExtraBold.woff') format('woff'),
+    url('Archivo-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Archivo-ExtraBoldItalic';
+  src:
+    url('Archivo-ExtraBoldItalic.woff2') format('woff2'),
+    url('Archivo-ExtraBoldItalic.woff') format('woff'),
+    url('Archivo-ExtraBoldItalic.ttf') format('truetype');
+  font-weight: 800;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Archivo-Black';
+  src:
+    url('Archivo-Black.woff2') format('woff2'),
+    url('Archivo-Black.woff') format('woff'),
+    url('Archivo-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Archivo-BlackItalic';
+  src:
+    url('Archivo-BlackItalic.woff2') format('woff2'),
+    url('Archivo-BlackItalic.woff') format('woff'),
+    url('Archivo-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-display: swap;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Archivo-Variable';
+  src:
+    url('Archivo-Variable.woff2') format('woff2'),
+    url('Archivo-Variable.woff') format('woff'),
+    url('Archivo-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Archivo-VariableItalic';
+  src:
+    url('Archivo-VariableItalic.woff2') format('woff2'),
+    url('Archivo-VariableItalic.woff') format('woff'),
+    url('Archivo-VariableItalic.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: italic;
+}
