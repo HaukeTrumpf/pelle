@@ -63,7 +63,7 @@ const setRef = (el) => {
       <img
         class="absolute w-full top-0 m:top-[-20vh] z-10"
         loading="lazy"
-        src="~/assets/images/wimpel2.png"
+        src="/assets/images/wimpel2.png"
         alt=""
       />
       <HeroSection />

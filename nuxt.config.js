@@ -5,7 +5,7 @@ export default defineNuxtConfig({
 
   app: {
     // Optional: Füge den Basis-URL-Pfad hinzu, falls das Repository nicht auf einem Custom-Domain veröffentlicht wird
-    baseURL: '/pelle/', // Verwende den Repository-Namen
+    baseURL: '/', // Verwende den Repository-Namen
   },
 
   css: ['~/assets/css/custom.css', '~/assets/font/font.css'],
@@ -32,7 +32,7 @@ export default defineNuxtConfig({
 
   // Sitemap-Einstellungen
   sitemap: {
-    hostname: 'https://example.com', // Ersetze mit deiner echten Domain
+    hostname: 'https://hauke-trumpf.com', // Ersetze mit deiner echten Domain
     routes: [
       { url: '/#events', priority: 1.0 }, // Füge wichtige Routen mit Priorität hinzu
       { url: '/#contact', priority: 0.8 },
