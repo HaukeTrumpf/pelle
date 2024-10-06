@@ -50,7 +50,7 @@ const handleSubmit = async (event: Event) => {
 
 <template>
   <!-- Das Formular-Container div wird als Flex-Container definiert -->
-  <div class="flex items-center justify-center h-screen">
+  <div class="flex items-center justify-center h-screen p-10 md:p-0">
     <div class="max-w-md w-full p-8 bg-white shadow-md rounded-lg">
       <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6 font-clash-semibold">
         Kontaktformular
