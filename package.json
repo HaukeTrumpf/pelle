@@ -5,13 +5,15 @@
     "dev": "nuxt dev",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
     "@nuxtjs/robots": "^4.1.7",
     "@nuxtjs/sitemap": "^6.1.1",
     "@vueuse/head": "^2.0.0",
-    "nuxt": "^3.0.0"
+    "nuxt": "^3.0.0",
+    "push-dir": "^0.4.1"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^5.3.5",
