@@ -30,7 +30,7 @@ onMounted(fetchEvents);
   >
     <div class="container mx-auto p-8 md:p-16 text-center">
       <h2
-        class="font-clash-semibold font-bold text-4xl md:text-6xl text-[#80ed99] mb-16"
+        class="font-clash-semibold font-bold text-4xl md:text-6xl text-brand-blue mb-16"
       >
         Kommende Pelle Events
       </h2>
