@@ -3,8 +3,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   target: 'static',
 
-  router: {
-    base: '/pelle/'
+  app: {
+    // Optional: Füge den Basis-URL-Pfad hinzu, falls das Repository nicht auf einem Custom-Domain veröffentlicht wird
+    baseURL: '/pelle/', // Verwende den Repository-Namen
   },
 
   css: ['~/assets/css/custom.css', '~/assets/font/font.css'],
