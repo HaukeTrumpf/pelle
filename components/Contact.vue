@@ -30,7 +30,7 @@ const handleSubmit = async (event: Event) => {
 
   try {
     const response = await fetch(
-      'https://script.google.com/macros/s/AKfycbwUockoGjE6J9eaeQssoaMiFkRRRvaa1_1C5ICK5ITBQwpPHG8S-ES3psQhGbnM-BiT/exec',
+      'https://script.google.com/macros/s/AKfycbw9UGJQaOa9JGMD3S-skZrsOsAGOpvIHKM3JA__0POSDmKkYubP1Z4dGQS4Jp7ek-8j/exec',
       {
         method: 'POST',
         body: formData,
