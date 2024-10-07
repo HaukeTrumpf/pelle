@@ -1,5 +1,16 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+
+  head: {
+    script: [
+      {
+        src: 'https://www.google.com/recaptcha/api.js',
+        async: true,
+        defer: true,
+      },
+    ],
+  },
+
   devtools: { enabled: true },
   target: 'static',
 
@@ -38,4 +49,6 @@ export default defineNuxtConfig({
       { url: '/#contact', priority: 0.8 },
     ],
   },
+
+  compatibilityDate: '2024-10-07',
 });

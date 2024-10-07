@@ -14,10 +14,19 @@ const handleSubmit = async (event: Event) => {
   isSubmitting.value = true; // Zeige den Ladezustand an
   successMessage.value = ''; // Zurücksetzen der Erfolgsmeldung
 
+  // reCAPTCHA-Token abrufen
+  const recaptchaToken = (window as any).grecaptcha.getResponse();
+  if (!recaptchaToken) {
+    successMessage.value = 'Bitte bestätige, dass du kein Roboter bist.';
+    isSubmitting.value = false;
+    return;
+  }
+
   const formData = new FormData();
   formData.append('name', name.value);
   formData.append('email', email.value);
   formData.append('message', message.value);
+  formData.append('g-recaptcha-response', recaptchaToken); // reCAPTCHA-Token hinzufügen
 
   try {
     const response = await fetch(
@@ -36,6 +45,7 @@ const handleSubmit = async (event: Event) => {
       name.value = '';
       email.value = '';
       message.value = '';
+      (window as any).grecaptcha.reset(); // reCAPTCHA zurücksetzen
     } else {
       successMessage.value =
         'Es gab einen Fehler beim Senden der Nachricht. Bitte versuche es später noch einmal.';
@@ -93,6 +103,9 @@ const handleSubmit = async (event: Event) => {
             required
           ></textarea>
         </div>
+
+        <!-- reCAPTCHA Widget -->
+        <div class="g-recaptcha" data-sitekey="6Lf18FkqAAAAABmcLXiM9PDU1zFsdsSJb-ae68az"></div>
 
         <button
           type="submit"
