@@ -137,7 +137,7 @@ const handleSubmit = async (event: Event) => {
 
         <button
           type="submit"
-          class="w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+          class="w-full flex justify-center bg-brand-blue hover:bg-[#2a5f75] text-brand-yellow font-bold py-3 md:py-4 px-6 md:px-8 rounded-full text-base md:text-lg"
           :disabled="isSubmitting"
         >
           <span v-if="isSubmitting">Sende Nachricht...</span>
@@ -147,7 +147,7 @@ const handleSubmit = async (event: Event) => {
 
       <!-- Erfolgsmeldung anzeigen, wenn showForm false ist -->
       <div v-else class="text-center">
-        <p class="mt-6 text-green-700 text-lg font-semibold">
+        <p class=" text-[#2a5f75]  text-lg font-semibold">
           Vielen Dank für deine Nachricht! Wir melden uns bald bei dir.
         </p>
       </div>

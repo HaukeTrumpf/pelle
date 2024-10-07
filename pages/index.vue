@@ -1,22 +1,22 @@
 <script setup lang="ts">
-import { defineAsyncComponent } from 'vue';
-import { useHead } from '@vueuse/head'; // Meta-Tag Support
-import HeroSection from '~/components/HeroSection.vue';
+import { defineAsyncComponent } from '#imports';
+import HeroSection from '@/components/HeroSection.vue';
 const EventPlaner = defineAsyncComponent(
-  () => import('~/components/EventPlaner.vue')
+  () => import('@/components/EventPlaner.vue')
 );
 const InstaGallery = defineAsyncComponent(
-  () => import('~/components/InstaGallery.vue')
+  () => import('@/components/InstaGallery.vue')
 );
-const Contact = defineAsyncComponent(() => import('~/components/Contact.vue'));
-import { ref } from 'vue';
+const Contact = defineAsyncComponent(() => import('@/components/Contact.vue'));
+import { ref } from '#imports';
 
 // Meta-Tags und SEO optimierung
 useHead({
-  title: 'Pelle der Spaeti | Pelle',
+  title: 'Pelle der Späti | Pelle',
   meta: [
-    { name: 'description', content: 'Events und Kultur bei Pelle' },
-    { name: 'keywords', content: 'Kultur, Events, Spaeti, Pelle, was, geht' },
+  { name: 'description', content: 'Entdecke spannende Events und vielfältige Kulturangebote bei Pelle. Von Live-Musik über Kunstausstellungen bis hin zu kulturellen Veranstaltungen – erlebe einzigartige Momente in einer inspirierenden Atmosphäre.' },
+
+    { name: 'keywords', content: 'Kultur, Events, Späti, Pelle, was, geht' },
     { property: 'og:title', content: 'Pelle' },
     {
       property: 'og:description',
@@ -64,7 +64,7 @@ const setRef = (el) => {
         class="absolute w-full top-0 m:top-[-20vh] z-10"
         loading="lazy"
         src="/assets/images/wimpel2.png"
-        alt=""
+        alt="Wimpel"
       />
       <HeroSection />
     </section>

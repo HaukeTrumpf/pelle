@@ -1,4 +1,12 @@
 export default defineNuxtConfig({
+
+  head: {
+    htmlAttrs: {
+      lang: 'de' 
+    }
+  },
+
+
   devtools: { enabled: true },
   target: 'static',
 
