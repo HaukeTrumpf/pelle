@@ -9,10 +9,12 @@
     "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup"
   },
   "dependencies": {
+    "@dargmuesli/nuxt-cookie-control": "^8.4.13",
     "@nuxtjs/robots": "^4.1.7",
     "@nuxtjs/sitemap": "^6.1.1",
     "@vueuse/head": "^2.0.0",
     "nuxt": "^3.0.0",
+    "nuxt-cookie-control": "^1.9.93",
     "push-dir": "^0.4.1"
   },
   "devDependencies": {

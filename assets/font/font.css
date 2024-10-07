@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;  
+
 @font-face {
   font-family: 'Inter';
   font-weight: 100;
@@ -352,4 +356,25 @@
   font-weight: 100 900;
   font-display: swap;
   font-style: italic;
+}
+
+.cookieControl__BarButtons button {
+  background-color: #fcca03; /* Brand yellow background */
+  color: #1c4b5e; /* Brand blue text color */
+  font-weight: bold; /* Font weight bold */
+  padding: 12px 24px; /* padding: py-3 (12px top/bottom), px-6 (24px left/right) */
+  font-size: 16px; /* text-base -> 16px */
+  border-radius: 9999px; /* rounded-full -> fully rounded (pill shape) */
+  transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+@media (min-width: 768px) {
+  .cookieControl__BarButtons button {
+    padding: 16px 32px; /* md:py-4 (16px top/bottom), md:px-8 (32px left/right) */
+    font-size: 18px; /* md:text-lg -> 18px */
+  }
+}
+
+.cookieControl__BarButtons button:hover {
+  background-color: #dbcf7a; /* Hover color */
 }
