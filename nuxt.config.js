@@ -17,6 +17,15 @@ export default defineNuxtConfig({
   app: {
     // Optional: Füge den Basis-URL-Pfad hinzu, falls das Repository nicht auf einem Custom-Domain veröffentlicht wird
     baseURL: '/', // Verwende den Repository-Namen
+    head: {
+      script: [
+        {
+          src: 'https://www.google.com/recaptcha/api.js',
+          async: true,
+          defer: true,
+        },
+      ],
+    },
   },
 
   css: ['~/assets/css/custom.css', '~/assets/font/font.css'],

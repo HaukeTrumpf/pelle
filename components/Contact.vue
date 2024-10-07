@@ -1,21 +1,46 @@
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
-// Variablen für die Formularfelder und den Status der Erfolgsnachricht
+// Formularfelder und Statusvariablen
 const name = ref('');
 const email = ref('');
 const message = ref('');
-const successMessage = ref(''); // Erfolgsmeldung, die nach dem erfolgreichen Senden angezeigt wird
-const isSubmitting = ref(false); // Zum Anzeigen des Ladezustands
+const successMessage = ref('');
+const isSubmitting = ref(false);
+let recaptchaWidgetId: any;
 
-// Funktion zum Verarbeiten des Formulars
+// reCAPTCHA laden und initialisieren
+const loadRecaptcha = () => {
+  return new Promise((resolve) => {
+    if ((window as any).grecaptcha) {
+      resolve((window as any).grecaptcha);
+    } else {
+      const script = document.createElement('script');
+      script.src = 'https://www.google.com/recaptcha/api.js?render=explicit';
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        resolve((window as any).grecaptcha);
+      };
+      document.head.appendChild(script);
+    }
+  });
+};
+
+onMounted(async () => {
+  const grecaptcha = await loadRecaptcha();
+  recaptchaWidgetId = grecaptcha.render('recaptcha-container', {
+    sitekey: '6Lf18FkqAAAAABmcLXiM9PDU1zFsdsSJb-ae68az', // Ersetze durch deinen Site Key
+  });
+});
+
+// Formularverarbeitung
 const handleSubmit = async (event: Event) => {
-  event.preventDefault(); // Verhindert das Standard-Formular-Submit
-  isSubmitting.value = true; // Zeige den Ladezustand an
-  successMessage.value = ''; // Zurücksetzen der Erfolgsmeldung
+  event.preventDefault();
+  isSubmitting.value = true;
+  successMessage.value = '';
 
-  // reCAPTCHA-Token abrufen
-  const recaptchaToken = (window as any).grecaptcha.getResponse();
+  const recaptchaToken = (window as any).grecaptcha.getResponse(recaptchaWidgetId);
   if (!recaptchaToken) {
     successMessage.value = 'Bitte bestätige, dass du kein Roboter bist.';
     isSubmitting.value = false;
@@ -26,11 +51,11 @@ const handleSubmit = async (event: Event) => {
   formData.append('name', name.value);
   formData.append('email', email.value);
   formData.append('message', message.value);
-  formData.append('g-recaptcha-response', recaptchaToken); // reCAPTCHA-Token hinzufügen
+  formData.append('g-recaptcha-response', recaptchaToken);
 
   try {
     const response = await fetch(
-      'https://script.google.com/macros/s/AKfycbw9UGJQaOa9JGMD3S-skZrsOsAGOpvIHKM3JA__0POSDmKkYubP1Z4dGQS4Jp7ek-8j/exec',
+      'https://script.google.com/macros/s/AKfycbzhiVOvRHWC6NHYKttuk16m7QDofZv7A80IPwYVlMlWDr1cE8nnklMqJoXc5IXsHlU8/exec', // Ersetze durch deine Script-ID
       {
         method: 'POST',
         body: formData,
@@ -45,7 +70,7 @@ const handleSubmit = async (event: Event) => {
       name.value = '';
       email.value = '';
       message.value = '';
-      (window as any).grecaptcha.reset(); // reCAPTCHA zurücksetzen
+      (window as any).grecaptcha.reset(recaptchaWidgetId);
     } else {
       successMessage.value =
         'Es gab einen Fehler beim Senden der Nachricht. Bitte versuche es später noch einmal.';
@@ -53,20 +78,18 @@ const handleSubmit = async (event: Event) => {
   } catch (error) {
     successMessage.value = 'Ein Fehler ist aufgetreten: ' + error;
   } finally {
-    isSubmitting.value = false; // Ladezustand beenden
+    isSubmitting.value = false;
   }
 };
 </script>
 
 <template>
-  <!-- Das Formular-Container div wird als Flex-Container definiert -->
   <div class="flex items-center justify-center h-screen p-10 md:p-0">
     <div class="max-w-md w-full p-8 bg-white shadow-md rounded-lg">
       <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6 font-clash-semibold">
         Kontaktformular
       </h2>
 
-      <!-- Formular -->
       <form @submit="handleSubmit" class="space-y-6 font-archivo-regular">
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
@@ -105,7 +128,7 @@ const handleSubmit = async (event: Event) => {
         </div>
 
         <!-- reCAPTCHA Widget -->
-        <div class="g-recaptcha" data-sitekey="6Lf18FkqAAAAABmcLXiM9PDU1zFsdsSJb-ae68az"></div>
+        <div id="recaptcha-container"></div>
 
         <button
           type="submit"
@@ -118,7 +141,10 @@ const handleSubmit = async (event: Event) => {
       </form>
 
       <!-- Erfolgsmeldung -->
-      <p v-if="successMessage" class="mt-6 text-center text-green-700 font-semibold font-clash-semibold">
+      <p
+        v-if="successMessage"
+        class="mt-6 text-center text-green-700 font-semibold font-clash-semibold"
+      >
         {{ successMessage }}
       </p>
     </div>
@@ -126,5 +152,5 @@ const handleSubmit = async (event: Event) => {
 </template>
 
 <style scoped>
-/* Tailwind wird für Schriftarten und Styles verwendet */
+/* Deine Tailwind-Styles */
 </style>
