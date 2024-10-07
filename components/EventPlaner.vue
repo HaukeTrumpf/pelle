@@ -3,17 +3,45 @@ import { ref, onMounted } from 'vue';
 
 // Die URL deiner Google Apps Script Web-App
 const API_URL =
-  'https://script.google.com/macros/s/AKfycbxln1NElDk-mZBs-6wW-hImPzeVsSH8lMgS2v5MHEqgAl9G9M65h3AfkIa0b1Ckq3TlRw/exec';
+  'https://script.google.com/macros/s/AKfycbzSyUn7v-aQdgPNDAM67SPGYNE8w1DHS7OidwgNFL0d9Ro2D_mYw3w4ML_5dkgBsY_xMg/exec';
 
 // Events Data Ref
 const events = ref([]);
+
+// Hilfsfunktion zum Überprüfen, ob ein Datum heute ist
+function isToday(dateString) {
+  const eventDate = new Date(dateString);
+  const today = new Date();
+  return (
+    eventDate.getDate() === today.getDate() &&
+    eventDate.getMonth() === today.getMonth() &&
+    eventDate.getFullYear() === today.getFullYear()
+  );
+}
+
+// Hilfsfunktion zum Formatieren des Datums
+function formatDate(dateString) {
+  const date = new Date(dateString);
+  const day = ('0' + date.getDate()).slice(-2);
+  const month = ('0' + (date.getMonth() + 1)).slice(-2);
+  const year = date.getFullYear();
+  return `${day}.${month}.${year}`; // DD.MM.YYYY Format
+}
 
 // Fetch Data from Google Apps Script
 const fetchEvents = async () => {
   try {
     const response = await fetch(API_URL);
     const data = await response.json();
-    events.value = data; // Speichert die Daten aus der Google Sheets API
+
+    // Füge für jedes Event ein isToday-Flag hinzu und formatiere das Datum
+    events.value = data.map((event) => {
+      return {
+        ...event,
+        isToday: isToday(event.date),
+        formattedDate: formatDate(event.date),
+      };
+    });
   } catch (error) {
     console.error('Error fetching events:', error);
   }
@@ -26,7 +54,7 @@ onMounted(fetchEvents);
   <!-- Events Page -->
   <div
     id="termine"
-    class="z-0   flex flex-col items-center justify-start pt-32 md:pt-40 p-10"
+    class="z-0 flex flex-col items-center justify-start pt-32 md:pt-40 p-10"
   >
     <div class="container mx-auto p-8 md:p-16 text-center">
       <h2
@@ -39,8 +67,12 @@ onMounted(fetchEvents);
         <h3 class="font-clash-semibold text-3xl md:text-4xl mb-4">
           {{ event.eventName }}
         </h3>
+        <!-- Zeige "Heute" an, wenn isToday true ist -->
+        <div v-if="event.isToday" class="font-archivo-regular text-lg md:text-xl text-[#4d665e]">
+          <strong>Heute</strong>
+        </div>
         <p class="font-archivo-regular text-lg md:text-xl text-[#4d665e]">
-          Am: {{ event.date }} <br />
+          Am: {{ event.formattedDate }} <br />
           Um: {{ event.time }} <br />
           Eintritt: {{ event.entranceFee }} €
         </p>
