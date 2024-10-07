@@ -1,108 +1,59 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { useCookieControl } from '#imports';
+import { ref, onMounted } from 'vue';
 
-const { cookiesEnabledIds } = useCookieControl();
-
-if (!Array.isArray(cookiesEnabledIds.value)) {
-  cookiesEnabledIds.value = [];
-}
-
+// Formularfelder
 const name = ref('');
 const email = ref('');
 const message = ref('');
 const successMessage = ref('');
 const isSubmitting = ref(false);
-let recaptchaWidgetId: number | null = null;
-const recaptchaLoaded = ref(false);
+const honeypot = ref(''); // Honeypot-Feld
+const nonce = ref(''); // Nonce-Feld
+const showForm = ref(true); // Neue Variable zum Steuern der Sichtbarkeit des Formulars
 
-// Funktion zum Laden von reCAPTCHA
-const loadRecaptcha = (): Promise<void> => {
-  return new Promise((resolve) => {
-    if (document.getElementById('recaptcha-script')) {
-      resolve();
-    } else {
-      const script = document.createElement('script');
-      script.id = 'recaptcha-script';
-      script.src = 'https://www.google.com/recaptcha/api.js?render=explicit';
-      script.async = true;
-      script.defer = true;
-      script.onload = () => {
-        resolve();
-      };
-      document.head.appendChild(script);
-    }
-  });
-};
+// Nonce beim Laden der Seite vom Server abrufen
+onMounted(async () => {
+  try {
+    const response = await fetch(
+      'https://script.google.com/macros/s/AKfycbykhl0aGaXybn_XsH4uCyolIbNvh6fIMwiF73GmdyGCi4otgWGAdNPcvGnIqc4Ifl4k/exec' // Ersetzen Sie IHR_SCRIPT_ID durch Ihre tatsächliche Script-ID
+    );
+    const data = await response.json();
+    nonce.value = data.nonce;
+  } catch (error) {
+    console.error('Fehler beim Abrufen des Nonce:', error);
+    alert('Ein Fehler ist aufgetreten. Bitte laden Sie die Seite neu.');
+  }
+});
 
-// Initialisiere reCAPTCHA, wenn der Benutzer zugestimmt hat
-const initializeRecaptcha = async () => {
-  console.log('initializeRecaptcha aufgerufen');
-  await loadRecaptcha();
-
-  const renderReCaptcha = () => {
-    const grecaptcha = (window as any).grecaptcha;
-    if (grecaptcha && grecaptcha.render) {
-      recaptchaWidgetId = grecaptcha.render('recaptcha-container', {
-        sitekey: '6Lf18FkqAAAAABmcLXiM9PDU1zFsdsSJb-ae68az', // Ersetze durch deinen reCAPTCHA Site Key
-      });
-      console.log('reCAPTCHA Widget-ID:', recaptchaWidgetId);
-      recaptchaLoaded.value = true;
-    } else {
-      setTimeout(renderReCaptcha, 100);
-    }
-  };
-
-  renderReCaptcha();
-};
-
-// Beobachte die Cookie-Einwilligungen
-watch(
-  () => cookiesEnabledIds.value,
-  (newVal) => {
-    console.log('Aktivierte Cookies:', newVal);
-    if (Array.isArray(newVal) && newVal.includes('recaptcha')) {
-      console.log('reCAPTCHA wird initialisiert');
-      initializeRecaptcha();
-    } else {
-      console.log('reCAPTCHA wurde nicht akzeptiert');
-    }
-  },
-  { immediate: true }
-);
-
-// Formularverarbeitung
 const handleSubmit = async (event: Event) => {
   event.preventDefault();
   isSubmitting.value = true;
   successMessage.value = '';
 
-  if (!recaptchaLoaded.value) {
-    successMessage.value = 'Bitte akzeptiere die Cookies, um das Formular zu senden.';
+  // Honeypot-Check: Wenn das Honeypot-Feld ausgefüllt ist, handelt es sich wahrscheinlich um einen Bot
+  if (honeypot.value) {
+    successMessage.value = 'Spam erkannt. Ihre Nachricht wurde nicht gesendet.';
     isSubmitting.value = false;
     return;
   }
 
-  const grecaptcha = (window as any).grecaptcha;
-  const recaptchaToken = grecaptcha.getResponse(recaptchaWidgetId);
-
-  if (!recaptchaToken) {
-    successMessage.value = 'Bitte bestätige, dass du kein Roboter bist.';
-    isSubmitting.value = false;
-    return;
-  }
-
-  const formData = new FormData();
+  // Formulardaten als URL-kodierten String zusammenstellen
+  const formData = new URLSearchParams();
   formData.append('name', name.value);
   formData.append('email', email.value);
   formData.append('message', message.value);
-  formData.append('g-recaptcha-response', recaptchaToken);
+  formData.append('nonce', nonce.value); // Nonce mitsenden
 
   try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbxxBdmKVHKB-drfjgC8nXlXH7HfbPCUceaahZ7h1xhHlNe2eH6JSlwn-dkeJOHgG9X_/exec', {
-      method: 'POST',
-      body: formData,
-    });
+    // Senden des Formulars an Ihr Google Apps Script
+    const response = await fetch(
+      'https://script.google.com/macros/s/AKfycbykhl0aGaXybn_XsH4uCyolIbNvh6fIMwiF73GmdyGCi4otgWGAdNPcvGnIqc4Ifl4k/exec', // Ersetzen Sie IHR_SCRIPT_ID durch Ihre tatsächliche Script-ID
+      {
+        method: 'POST',
+        body: formData,
+        // WICHTIG: Keine zusätzlichen Header hinzufügen!
+      }
+    );
 
     const result = await response.json();
     if (result.status === 'success') {
@@ -111,9 +62,10 @@ const handleSubmit = async (event: Event) => {
       name.value = '';
       email.value = '';
       message.value = '';
-      grecaptcha.reset(recaptchaWidgetId);
+      // Formular ausblenden
+      showForm.value = false;
     } else {
-      successMessage.value = 'Es gab einen Fehler beim Senden der Nachricht. Bitte versuche es später noch einmal.';
+      successMessage.value = 'Es gab einen Fehler: ' + result.message;
     }
   } catch (error) {
     console.error('Fehler beim Senden des Formulars:', error);
@@ -127,11 +79,13 @@ const handleSubmit = async (event: Event) => {
 <template>
   <div class="flex items-center justify-center h-screen p-10 md:p-0">
     <div class="max-w-md w-full p-8 bg-white shadow-md rounded-lg">
-      <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6">
+   
+
+      <!-- Formular anzeigen, wenn showForm true ist -->
+      <form v-if="showForm" @submit="handleSubmit" class="space-y-6">
+        <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6">
         Kontaktformular
       </h2>
-
-      <form @submit="handleSubmit" class="space-y-6">
         <div>
           <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
           <input
@@ -168,21 +122,18 @@ const handleSubmit = async (event: Event) => {
           ></textarea>
         </div>
 
-        <!-- reCAPTCHA Widget -->
-        <div id="recaptcha-container"></div>
+        <!-- Honeypot-Feld -->
+        <input
+          type="text"
+          name="captcha"
+          v-model="honeypot"
+          tabindex="-1"
+          autocomplete="off"
+          style="display:none"
+        />
 
-        <!-- Rechtlicher Hinweis -->
-         <p class="text-sm text-gray-600 mt-2" v-if="!cookiesEnabledIds.includes('recaptcha')">
-          Dieses Formular ist durch reCAPTCHA geschützt, und es gelten die
-          <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer"
-            >Datenschutzbestimmungen</a
-          >
-          und
-          <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer"
-            >Nutzungsbedingungen</a
-          >
-          von Google.
-        </p>
+        <!-- Nonce als verstecktes Feld -->
+        <!-- Nicht notwendig, da der Nonce in der Variable gespeichert ist -->
 
         <button
           type="submit"
@@ -194,8 +145,15 @@ const handleSubmit = async (event: Event) => {
         </button>
       </form>
 
-      <!-- Erfolgsmeldung -->
-      <p v-if="successMessage" class="mt-6 text-center text-green-700">
+      <!-- Erfolgsmeldung anzeigen, wenn showForm false ist -->
+      <div v-else class="text-center">
+        <p class="mt-6 text-green-700 text-lg font-semibold">
+          Vielen Dank für deine Nachricht! Wir melden uns bald bei dir.
+        </p>
+      </div>
+
+      <!-- Fehlermeldungen anzeigen -->
+      <p v-if="successMessage && showForm" class="mt-6 text-center text-red-700">
         {{ successMessage }}
       </p>
     </div>
@@ -203,5 +161,5 @@ const handleSubmit = async (event: Event) => {
 </template>
 
 <style scoped>
-/* Deine Tailwind-Styles */
+/* Tailwind Styles */
 </style>
