@@ -57,7 +57,8 @@ const handleSubmit = async (event: Event) => {
 
     const result = await response.json();
     if (result.status === 'success') {
-      successMessage.value = 'Vielen Dank für deine Nachricht! Wir melden uns bald bei dir.';
+      successMessage.value =
+        'Vielen Dank für deine Nachricht! Wir melden uns bald bei dir.';
       // Formular zurücksetzen
       name.value = '';
       email.value = '';
@@ -69,7 +70,8 @@ const handleSubmit = async (event: Event) => {
     }
   } catch (error) {
     console.error('Fehler beim Senden des Formulars:', error);
-    successMessage.value = 'Ein Fehler ist aufgetreten. Bitte versuche es später erneut.';
+    successMessage.value =
+      'Ein Fehler ist aufgetreten. Bitte versuche es später erneut.';
   } finally {
     isSubmitting.value = false;
   }
@@ -79,15 +81,15 @@ const handleSubmit = async (event: Event) => {
 <template>
   <div class="flex items-center justify-center h-screen p-10 md:p-0">
     <div class="max-w-md w-full p-8 bg-white shadow-md rounded-lg">
-   
-
       <!-- Formular anzeigen, wenn showForm true ist -->
       <form v-if="showForm" @submit="handleSubmit" class="space-y-6">
         <h2 class="text-3xl font-semibold text-gray-800 text-center mb-6">
-        Kontaktformular
-      </h2>
+          Kontaktformular
+        </h2>
         <div>
-          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+          <label for="name" class="block text-sm font-medium text-gray-700"
+            >Name</label
+          >
           <input
             type="text"
             id="name"
@@ -99,7 +101,9 @@ const handleSubmit = async (event: Event) => {
         </div>
 
         <div>
-          <label for="email" class="block text-sm font-medium text-gray-700">E-Mail</label>
+          <label for="email" class="block text-sm font-medium text-gray-700"
+            >E-Mail</label
+          >
           <input
             type="email"
             id="email"
@@ -111,7 +115,9 @@ const handleSubmit = async (event: Event) => {
         </div>
 
         <div>
-          <label for="message" class="block text-sm font-medium text-gray-700">Nachricht</label>
+          <label for="message" class="block text-sm font-medium text-gray-700"
+            >Nachricht</label
+          >
           <textarea
             id="message"
             v-model="message"
@@ -129,7 +135,7 @@ const handleSubmit = async (event: Event) => {
           v-model="honeypot"
           tabindex="-1"
           autocomplete="off"
-          style="display:none"
+          style="display: none"
         />
 
         <!-- Nonce als verstecktes Feld -->
@@ -147,13 +153,16 @@ const handleSubmit = async (event: Event) => {
 
       <!-- Erfolgsmeldung anzeigen, wenn showForm false ist -->
       <div v-else class="text-center">
-        <p class=" text-[#2a5f75]  text-lg font-semibold">
+        <p class="text-[#2a5f75] text-lg font-semibold">
           Vielen Dank für deine Nachricht! Wir melden uns bald bei dir.
         </p>
       </div>
 
       <!-- Fehlermeldungen anzeigen -->
-      <p v-if="successMessage && showForm" class="mt-6 text-center text-red-700">
+      <p
+        v-if="successMessage && showForm"
+        class="mt-6 text-center text-red-700"
+      >
         {{ successMessage }}
       </p>
     </div>

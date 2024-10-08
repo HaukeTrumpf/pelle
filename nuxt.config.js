@@ -1,11 +1,9 @@
 export default defineNuxtConfig({
-
   head: {
     htmlAttrs: {
-      lang: 'de' 
-    }
+      lang: 'de',
+    },
   },
-
 
   devtools: { enabled: true },
   target: 'static',
@@ -23,10 +21,7 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: [
-    '@nuxtjs/robots',
-    '@nuxtjs/sitemap',
-  ],
+  modules: ['@nuxtjs/robots', '@nuxtjs/sitemap'],
 
   robots: {
     UserAgent: '*',

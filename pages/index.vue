@@ -15,7 +15,11 @@ import Location from '~/components/Location.vue';
 useHead({
   title: 'Pelle der Späti | Pelle',
   meta: [
-  { name: 'description', content: 'Entdecke spannende Events und vielfältige Kulturangebote bei Pelle. Von Live-Musik über Kunstausstellungen bis hin zu kulturellen Veranstaltungen – erlebe einzigartige Momente in einer inspirierenden Atmosphäre.' },
+    {
+      name: 'description',
+      content:
+        'Entdecke spannende Events und vielfältige Kulturangebote bei Pelle. Von Live-Musik über Kunstausstellungen bis hin zu kulturellen Veranstaltungen – erlebe einzigartige Momente in einer inspirierenden Atmosphäre.',
+    },
 
     { name: 'keywords', content: 'Kultur, Events, Späti, Pelle, was, geht' },
     { property: 'og:title', content: 'Pelle' },
@@ -60,28 +64,26 @@ const setRef = (el) => {
 <template>
   <div class="page-container">
     <!-- hero-section -->
-    <section id="hero" class="  bg-off-white h-screen">
-     
+    <section id="hero" class="bg-off-white h-screen">
       <HeroSection />
     </section>
 
     <!-- EventPlaner Section -->
-    <section id="events" class="  bg-off-white min-h-screen" >
+    <section id="events" class="bg-off-white min-h-screen">
       <EventPlaner />
     </section>
 
-    <section id="events" class="  bg-off-white min-h-screen" >
+    <section id="events" class="bg-off-white min-h-screen">
       <Location />
     </section>
 
-
     <!-- InstaGallery Section -->
-    <section id="gallery" class="  bg-off-white h-screen">
+    <section id="gallery" class="bg-off-white h-screen">
       <InstaGallery />
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class=" bg-off-white h-screen">
+    <section id="contact" class="bg-off-white h-screen">
       <Contact />
     </section>
   </div>

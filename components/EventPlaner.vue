@@ -68,7 +68,10 @@ onMounted(fetchEvents);
           {{ event.eventName }}
         </h3>
         <!-- Zeige "Heute" an, wenn isToday true ist -->
-        <div v-if="event.isToday" class="font-archivo-regular text-lg md:text-xl text-[#4d665e]">
+        <div
+          v-if="event.isToday"
+          class="font-archivo-regular text-lg md:text-xl text-[#4d665e]"
+        >
           <strong>Heute</strong>
         </div>
         <p class="font-archivo-regular text-lg md:text-xl text-[#4d665e]">
