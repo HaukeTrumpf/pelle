@@ -9,6 +9,7 @@ const InstaGallery = defineAsyncComponent(
 );
 const Contact = defineAsyncComponent(() => import('@/components/Contact.vue'));
 import { ref } from '#imports';
+import Location from '~/components/Location.vue';
 
 // Meta-Tags und SEO optimierung
 useHead({
@@ -60,12 +61,7 @@ const setRef = (el) => {
   <div class="page-container">
     <!-- hero-section -->
     <section id="hero" class="  bg-off-white h-screen">
-      <img
-        class="absolute w-full top-0 m:top-[-20vh] z-10"
-        loading="lazy"
-        src="/assets/images/wimpel2.png"
-        alt="Wimpel"
-      />
+     
       <HeroSection />
     </section>
 
@@ -73,6 +69,11 @@ const setRef = (el) => {
     <section id="events" class="  bg-off-white min-h-screen" >
       <EventPlaner />
     </section>
+
+    <section id="events" class="  bg-off-white min-h-screen" >
+      <Location />
+    </section>
+
 
     <!-- InstaGallery Section -->
     <section id="gallery" class="  bg-off-white h-screen">
