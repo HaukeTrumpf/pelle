@@ -35,7 +35,6 @@ export default defineNuxtConfig({
   },
 
   sitemap: {
-    hostname: 'https://hauke-trumpf.com',
     routes: [
       { url: '/#events', priority: 1.0 },
       { url: '/#contact', priority: 0.8 },
