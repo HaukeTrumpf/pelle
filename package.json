@@ -8,13 +8,10 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@dargmuesli/nuxt-cookie-control": "^8.4.13",
     "@nuxtjs/robots": "^4.1.7",
     "@nuxtjs/sitemap": "^6.1.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
-    "@vueuse/head": "^2.0.0",
-    "nuxt": "^3.0.0",
-    "nuxt-cookie-control": "^1.9.93"
+    "nuxt": "^3.0.0"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^5.3.5",
